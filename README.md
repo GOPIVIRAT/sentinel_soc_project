@@ -1,1 +1,1 @@
-# sentinel_soc_project
+# Microsoft Sentinel_soc_project
