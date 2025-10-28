@@ -4,6 +4,7 @@ After integrating Microsoft Defender for Cloud, I explored Microsoft Sentinel to
 
 Microsoft Sentinel acts as the **central SIEM and SOAR platform**, providing visibility across cloud and on-premises environments, enabling proactive threat detection and automated security response.
 
+i have created the workspace and then created the retention period to 180 days in the workspace this is where all the logs will be stroed 
 <img width="960" height="481" alt="image" src="https://github.com/user-attachments/assets/c7426a8d-3e82-467d-84e3-485cff8f307a" />
 <img width="964" height="528" alt="image" src="https://github.com/user-attachments/assets/697e5c01-1213-45be-8bc0-a5aa2ce41f5a" />
 <img width="961" height="478" alt="image" src="https://github.com/user-attachments/assets/78677c55-ed22-4195-b5d6-9b7ee4217880" />
@@ -57,13 +58,16 @@ Created **Watchlists** in Sentinel to store and reuse reference data during inve
 ### 🧩 4. Analytics Rules
 Configured **Analytic Rules** to automatically detect suspicious behavior patterns.
 
-- Used built-in templates such as *“Possible Brute Force Attack”* and *“Multiple Failed Sign-ins”*.  
-- Customized rule logic using KQL to match my environment.  
+- created a analytical rule such as *“Possible Brute Force Attack”* and *“Multiple Failed Sign-ins”*.  
+- Customized rule logic using KQL to match my environment. 
 - Enabled **alert grouping** and **automation rules** for better incident management.
 
 📸 *Screenshot suggestion:* Add image showing Analytics Rule configuration and detection results.
+<img width="1301" height="571" alt="image" src="https://github.com/user-attachments/assets/f431d089-7aad-46a1-bba2-f68684147f2d" />
+<img width="1349" height="633" alt="image" src="https://github.com/user-attachments/assets/f2a093b4-31ee-49cd-8c2c-c21636efbac0" />
+<img width="1331" height="590" alt="image" src="https://github.com/user-attachments/assets/a131df4d-bcfe-485f-b867-9d207b77ea25" />
 
----
+
 
 ### ⚙️ 5. Playbooks (SOAR Automation)
 Created **Playbooks** to automate incident response tasks using **Logic Apps**.
@@ -76,6 +80,7 @@ Created **Playbooks** to automate incident response tasks using **Logic Apps**.
 
 ### Content hub
 <img width="1294" height="563" alt="image" src="https://github.com/user-attachments/assets/8bcf63f2-ef2a-411e-ad96-441a997757c8" />
+<img width="1130" height="554" alt="image" src="https://github.com/user-attachments/assets/c54fa13e-4a16-460a-80fe-57483fea904e" />
 
 
 ### 🧾 Outcome
