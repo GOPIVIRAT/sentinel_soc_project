@@ -49,5 +49,7 @@ After completing the onboarding of all three systems:
 
 ### 🚀 Next Step
 With all machines onboarded and sending telemetry, the next phase focuses on **Attack Simulation and Detection** — performing controlled attacks like reconnaissance, brute-force, and privilege escalation to validate Sentinel detections and automation rules.
+<img width="1351" height="598" alt="image" src="https://github.com/user-attachments/assets/9b04417b-21d1-413c-88e9-7ce45cc2bd9d" />
+<img width="1003" height="299" alt="image" src="https://github.com/user-attachments/assets/38149b43-be04-4de5-8110-6f77aa73c06a" />
 
 
