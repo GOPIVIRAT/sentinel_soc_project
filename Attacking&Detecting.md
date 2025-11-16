@@ -204,6 +204,8 @@ DownloadString, Invoke-WebRequest, EncodedCommand, Bypass, IEX, Base64, Invoke-E
 <img width="1012" height="380" alt="image" src="https://github.com/user-attachments/assets/45f37753-e383-4e82-b13e-9d29ba4fca03" />
 <img width="1298" height="527" alt="image" src="https://github.com/user-attachments/assets/0c6b4404-80c9-4153-b736-dad02cb93850" />
 <img width="1117" height="497" alt="image" src="https://github.com/user-attachments/assets/fa31e1ea-4e17-40ae-80e9-0a5b93e57a33" />
+<img width="1119" height="571" alt="image" src="https://github.com/user-attachments/assets/aa29be95-3869-4181-a3a8-dafb95dc3bd0" />
+<img width="1137" height="605" alt="image" src="https://github.com/user-attachments/assets/9efa32bd-5565-4494-828f-8d25f76b0534" />
 ## 🚨 Alert Trigger
 Alert when any PowerShell script block contains known malicious keywords or encoding/obfuscation techniques.
 🛡 SOC Actions
@@ -214,6 +216,64 @@ Check for payload download or persistence creation
 Block external domain or IP
 
 Isolate endpoint if needed
+
+# ⏰ Detection: Suspicious Scheduled Task Creation
+
+## 📌 Overview
+
+Detects creation or modification of Windows Scheduled Tasks, a common persistence technique used by attackers to execute payloads at logon, startup, or at scheduled intervals.
+
+Field	Value
+Technique	T1053.005 – Scheduled Task
+Data Source	Security Logs, Sysmon (Event ID 1), TaskScheduler logs
+Severity	High
+## 🧪 Attack Simulation (Based on Screenshot)
+
+In this test, two malicious scheduled tasks were created:
+Commands used:
+<img width="977" height="243" alt="image" src="https://github.com/user-attachments/assets/70c15805-d3bc-4612-a205-357b7cc01931" />
+This technique is frequently used for persistence and privilege escalation.
+
+## 🔍 Detection Approach
+
+To detect scheduled task creation, look for:
+
+New task registration events
+
+Event ID 4698 – A scheduled task was created.
+
+Event ID 4699 – A scheduled task was deleted.
+
+Event ID 4702 – A scheduled task was updated.
+
+Sysmon process execution (Event ID 1)
+
+## Command lines containing:
+
+schtasks /create
+
+schtasks /change
+
+schtasks /run
+
+Suspicious actions
+
+Tasks running as SYSTEM
+
+Tasks executing cmd.exe, PowerShell, scripts, or unknown binaries
+
+Tasks triggered at logon, startup, or repeated intervals
+
+## 📘 Analytical Rule
+<img width="977" height="243" alt="image" src="https://github.com/user-attachments/assets/70c15805-d3bc-4612-a205-357b7cc01931" />
+<img width="1012" height="436" alt="image" src="https://github.com/user-attachments/assets/7c79b2fe-9dd8-4cd7-a699-7c5e4ec82eb6" />
+<img width="1025" height="437" alt="image" src="https://github.com/user-attachments/assets/1da59b88-9ba5-4e2a-8e06-a84d3e2237ed" />
+<img width="1346" height="641" alt="image" src="https://github.com/user-attachments/assets/40dadf96-90e7-49f5-8af0-c5c6e6501df9" />
+This analytic rule is created to automatically alert when a new or modified scheduled task is detected, especially when associated with suspicious commands or SYSTEM-level execution.
+
+## After detecting the scduled tasks running in the machine i was manually able to delete the tasks running 
+<img width="1048" height="341" alt="image" src="https://github.com/user-attachments/assets/58d01f70-1ee4-4328-84c9-51f855be34ba" />
+
 
 
 
