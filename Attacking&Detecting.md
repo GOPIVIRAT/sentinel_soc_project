@@ -337,6 +337,76 @@ These tools are uncommon in normal user activity but very common in attack chain
 This analytic rule is designed to detect reconnaissance behavior executed through system command-line utilities.
 Once triggered, the rule alerts the SOC team to investigate suspicious enumeration, assign the incident, and take appropriate action.
 
+# 🗂️ Registry Persistence — Run / RunOnce / Services
+Detection & Response Documentation
+## 📌 Summary
+
+Attack type: Persistence via Registry Modification
+Goal: Ensure malicious programs run automatically at system startup or user logon.
+MITRE ATT&CK:
+
+T1547 – Boot or Logon Autostart Execution
+
+T1547.001 – Registry Run Keys / Startup Folder
+
+Attackers commonly modify registry keys like Run, RunOnce, and RunOnceEx to maintain persistence even after reboots.
+
+## 🔥 How the attack was performed (simulation)
+## 1️⃣ User-Level Persistence (HKCU – No Admin Required)
+
+The attacker adds a malicious command to the Run key under the Current User hive:
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "Atomic Red Team" /T REG_SZ /F /D "{command_to_execute}"
+<img width="1147" height="230" alt="image" src="https://github.com/user-attachments/assets/670496e6-06ab-42d6-8ae7-dc50f1c469d7" />
+This causes the payload to execute every time the user logs in.
+
+## 2️⃣ System-Level Persistence (HKLM – Admin Required)
+
+The attacker performs a high-privilege persistence modification using RunOnceEx:
+
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceEx\0001\Depend" /V 1 /D "{thing_to_execute}"
+<img width="1216" height="210" alt="image" src="https://github.com/user-attachments/assets/ca2cb242-9220-42e4-8ce9-1427b47bc4be" />
+
+This executes the payload on next system startup, impacting all users.
+
+These techniques are widely used by malware, RATs, and threat actors to maintain access.
+
+## 🎯 Detection approach
+
+The analytic rule monitors for:
+
+Sysmon Event ID 13 — Registry value writes
+
+Sysmon Event ID 1 — Process creation that touches persistence-related registry paths
+
+## Registry paths monitored include:
+
+HKCU\...\Run
+
+HKCU\...\RunOnce
+
+HKLM\...\Run
+
+HKLM\...\RunOnceEx
+
+Services keys used to configure malicious service persistence
+
+Suspicious entries in these locations are highly indicative of malicious persistence.
+
+## 📘 Analytical Rule detection
+<img width="1147" height="230" alt="image" src="https://github.com/user-attachments/assets/c267f6db-99ea-40dc-a9e6-4e6fa5d83b1b" />
+<img width="1216" height="210" alt="image" src="https://github.com/user-attachments/assets/9fe71da2-e60d-46ff-9213-b5131b637045" />
+<img width="1036" height="444" alt="image" src="https://github.com/user-attachments/assets/54faf194-7b80-43c2-bc63-c8c962f5b2b9" />
+<img width="1029" height="439" alt="image" src="https://github.com/user-attachments/assets/f14f3c64-0783-4e69-b3ba-e1caff2084dd" />
+<img width="1034" height="444" alt="image" src="https://github.com/user-attachments/assets/e034bcbb-464f-4bd1-b5e8-826685e877b2" />
+<img width="1253" height="437" alt="image" src="https://github.com/user-attachments/assets/a45626fb-67c1-4349-9bb7-a68360e39e49" />
+<img width="1118" height="615" alt="image" src="https://github.com/user-attachments/assets/6b3a3590-4b0e-428f-a513-10217acb8818" />
+This analytic rule detects registry modification attempts targeting startup/persistence keys.
+When triggered, it alerts the SOC analyst to investigate any unexpected autoruns, validate processes, and remove malicious registry entries.
+
+## After detecting the REG keys running in the machine i was manually able to delete the REG keys running 
+<img width="1126" height="400" alt="image" src="https://github.com/user-attachments/assets/73f66062-6108-4a63-8a91-4325ad71006a" />
+<img width="1243" height="511" alt="image" src="https://github.com/user-attachments/assets/9bf3acc7-e7a1-424b-8164-70a999d2dff5" />
+
 
 
 
