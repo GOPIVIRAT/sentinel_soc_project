@@ -111,6 +111,129 @@ This analytical rule is created to automatically detect when **a successful logi
 The rule ensures Sentinel raises an alert so the SOC analyst can investigate, assign the incident, and take necessary action.
 <img width="1315" height="595" alt="image" src="https://github.com/user-attachments/assets/45155c60-67e8-495e-828a-0b97df59f3ac" />
 <img width="1334" height="570" alt="image" src="https://github.com/user-attachments/assets/60e26b12-ece0-40ca-a0ab-02ce8a218250" />
+<img width="1116" height="521" alt="image" src="https://github.com/user-attachments/assets/cbdf087a-786f-4339-b965-0f9bd561c133" />
+<img width="1122" height="579" alt="image" src="https://github.com/user-attachments/assets/310c4fb5-7e18-4b85-b278-afc183efc2b1" />
+
+## 📨 Macro-Enabled Phishing Attachment — Detection & Response
+# Summary:
+Attack Type: Phishing email with malicious macro-enabled attachment (.xlsm)
+Goal: Trick the user into opening an attachment that executes malicious PowerShell commands
+MITRE ATT&CK mapping:
+
+## Initial Access → Phishing: Attachment (T1566.001)
+
+Execution → Command & Scripting Interpreter: PowerShell (T1059.001)
+
+In this scenario, I simulated a phishing attack by downloading and opening a macro-enabled Excel file that, when opened, executed suspicious PowerShell commands. The activity was captured through Windows logs and detected using a custom analytic rule in Sentinel/Defender.
+
+## How the attack was performed (simulation)
+
+Downloaded a known malicious test file (PhishingAttachment.xlsm) from the Atomic Red Team repository using Invoke-WebRequest.
+
+Opened the macro-enabled Excel file to simulate a user falling victim to the phishing attempt.
+
+The embedded VBA macro triggered execution of suspicious PowerShell commands.
+
+This generated events such as:
+
+PowerShell operational logs
+
+Process creation events (Sysmon Event ID 1)
+
+Script Block logging (PowerShell Event ID 4104)
+
+⚠️ The file is safe for lab use but should only be executed in an isolated test environment.
+<img width="791" height="192" alt="image" src="https://github.com/user-attachments/assets/c87dd491-d8cc-4f82-b5c6-f3e008feee0f" />
+<img width="1146" height="85" alt="image" src="https://github.com/user-attachments/assets/908cf98d-5aba-47ff-826e-b2d8c0505589" />
+
+## Detection approach
+
+The detection focuses on identifying behaviors that indicate macro-triggered execution:
+
+A macro-enabled file (.xlsm) is opened → spawning PowerShell
+
+Excel (EXCEL.EXE) launching PowerShell is highly suspicious.
+
+PowerShell executing commands downloaded from the internet
+<img width="1013" height="422" alt="image" src="https://github.com/user-attachments/assets/897df4d0-7293-4c2b-981d-a14a446ddd25" />
+
+
+
+## Evidence includes:
+
+Unusual command patterns like Invoke-WebRequest, IEX, or encoded commands
+
+Process chain analysis
+Example:
+EXCEL.EXE → powershell.exe → suspicious command
+
+These signals correlate to typical phishing malware delivery techniques such as initial reconnaissance, payload staging, or lateral movement preparation.
+
+## Analytical Rule
+
+An analytic rule is created to automatically identify when a macro-enabled Office application spawns PowerShell, indicating a likely phishing attack.
+<img width="1028" height="341" alt="image" src="https://github.com/user-attachments/assets/bc7ef078-ef48-4557-84e8-4ed8169cab28" />
+<img width="851" height="447" alt="image" src="https://github.com/user-attachments/assets/b352d6e9-3ee9-49aa-a3a6-925605ceee82" />
+<img width="1343" height="599" alt="image" src="https://github.com/user-attachments/assets/cf3a13ac-7861-43dc-bac5-4197426cf4a9" />
+
+# ⚡ Detection: Suspicious PowerShell Command Execution
+
+## 📌 Overview
+
+Detects execution of high-risk PowerShell commands often used in attacks such as recon, payload download, script obfuscation, and privilege abuse.
+
+Field	Value
+Technique	T1059.001 – PowerShell
+Data Source	PowerShell Logs, Sysmon Event 1
+Severity	High
+## 🎯 Purpose
+
+Identify PowerShell commands containing known malicious patterns, including:
+DownloadString, Invoke-WebRequest, EncodedCommand, Bypass, IEX, Base64, Invoke-Expression, or obfuscation operators.
+
+## 🧪 Attack Simulation & Detection(Short)
+<img width="553" height="94" alt="image" src="https://github.com/user-attachments/assets/cf3ba445-53e9-4e38-9192-218976a0d5c1" />
+<img width="1207" height="387" alt="image" src="https://github.com/user-attachments/assets/5ab720ad-70ee-4de7-9848-32ddb1e2d93b" />
+<img width="849" height="69" alt="image" src="https://github.com/user-attachments/assets/820fc99a-a396-4580-ba85-5ab5924bda41" />
+<img width="960" height="312" alt="image" src="https://github.com/user-attachments/assets/39f8579e-c102-4334-80b2-51cc462bdfcd" />
+
+## Analytical rule
+📎 Screenshots
+<img width="844" height="502" alt="image" src="https://github.com/user-attachments/assets/650c2e79-90ef-4a75-ab2b-ef4ccd1da604" />
+<img width="1014" height="382" alt="image" src="https://github.com/user-attachments/assets/73e6e096-a95e-42db-b2e3-a71aa5c871f3" />
+<img width="1012" height="380" alt="image" src="https://github.com/user-attachments/assets/45f37753-e383-4e82-b13e-9d29ba4fca03" />
+<img width="1298" height="527" alt="image" src="https://github.com/user-attachments/assets/0c6b4404-80c9-4153-b736-dad02cb93850" />
+<img width="1117" height="497" alt="image" src="https://github.com/user-attachments/assets/fa31e1ea-4e17-40ae-80e9-0a5b93e57a33" />
+## 🚨 Alert Trigger
+Alert when any PowerShell script block contains known malicious keywords or encoding/obfuscation techniques.
+🛡 SOC Actions
+Retrieve full script block
+
+Check for payload download or persistence creation
+
+Block external domain or IP
+
+Isolate endpoint if needed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
