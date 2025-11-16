@@ -52,6 +52,11 @@ With all machines onboarded and sending telemetry, the next phase focuses on **A
 <img width="1351" height="598" alt="image" src="https://github.com/user-attachments/assets/9b04417b-21d1-413c-88e9-7ce45cc2bd9d" />
 <img width="1003" height="299" alt="image" src="https://github.com/user-attachments/assets/38149b43-be04-4de5-8110-6f77aa73c06a" />
 
+# These are the 15+ rules for now i have written and detected the different types of attacked performed on the machine & entra id & cloud shell etc..
+note(some rules are in the disabled mode)
+<img width="1282" height="610" alt="image" src="https://github.com/user-attachments/assets/cd4c9594-64de-478e-9760-d7b13f314eda" />
+
+
 # 🔐 Brute-Force Attack — Detection & Response
 
 ## Summary
