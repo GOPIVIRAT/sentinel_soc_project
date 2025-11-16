@@ -77,6 +77,41 @@ When this pattern is detected, **an alert is automatically generated** in Micros
 <img width="1349" height="633" alt="image" src="https://github.com/user-attachments/assets/1eac81c1-3fb9-458d-bae9-a46b92a8713a" />
 <img width="1331" height="590" alt="image" src="https://github.com/user-attachments/assets/e9a8fb66-fafb-4725-8a66-51356922e91c" />
 
+# ✅ Successful Login After Brute-Force Attack — Detection & Response
+
+## Summary
+**Attack type:** Post-bruteforce successful authentication  
+**Goal:** An attacker gains access after repeatedly attempting incorrect passwords.  
+**MITRE ATT&CK mapping:** *Credential Access → Brute Force (T1110)* & *Initial Access → Valid Accounts (T1078)*
+
+In this scenario, I monitored and documented a **successful login that occurs immediately after multiple failed login attempts**, indicating a potentially compromised account.
+
+---
+
+## How the attack was performed (simulation)
+- First, a brute-force sequence was generated, producing multiple **failed login events (4625)**.
+- Shortly after, a **successful login event (4624)** occurred for the same user, confirming the attack succeeded.
+- This chain is a strong indicator that credentials were guessed or cracked.
+
+---
+
+## Detection approach
+To detect this attack, we look for:
+
+1. **Repeated failed logins by the same user or from the same IP** within a short time window.  
+2. **A successful login event immediately after** the failures for the same account.  
+
+This combination signals a possible **account compromise** following a brute-force attempt.
+<img width="1307" height="583" alt="image" src="https://github.com/user-attachments/assets/aa2ce828-e71b-48c6-9816-a0428cf42c53" />
+
+---
+
+## Analytical rule  
+This analytical rule is created to automatically detect when **a successful login occurs after a burst of failed attempts**, which strongly indicates credential compromise.  
+The rule ensures Sentinel raises an alert so the SOC analyst can investigate, assign the incident, and take necessary action.
+<img width="1315" height="595" alt="image" src="https://github.com/user-attachments/assets/45155c60-67e8-495e-828a-0b97df59f3ac" />
+<img width="1334" height="570" alt="image" src="https://github.com/user-attachments/assets/60e26b12-ece0-40ca-a0ab-02ce8a218250" />
+
 
 
 
