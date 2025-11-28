@@ -332,9 +332,111 @@ Email to SOC analyst
 <img width="1137" height="537" alt="image" src="https://github.com/user-attachments/assets/febeee14-d945-4f46-ac12-cf5d7b712cb8" />
 
 
+# 📌 HTTP → Blob Storage → Email Alert Playbook
+
+## Azure Logic App – Storage Monitoring Automation ##
+
+This playbook demonstrates how an HTTP-triggered Logic App can write data into Azure Blob Storage, and how this activity can generate an alert that is delivered to the SOC analyst via email.
+This workflow shows how external interactions can lead to storage activity and how SOC automation can detect and notify analysts.
+<img width="766" height="157" alt="image" src="https://github.com/user-attachments/assets/88fb4e6d-4bf7-41e5-8e26-505bf93c583b" />
 
 
+**🚀 Overview**
 
+This Logic App performs three main actions:
+
+Receives an HTTP request with a query parameter (e.g., name).
+
+Creates a Blob file inside Azure Storage using that parameter.
+
+Returns a response back to the requester.
+
+A Sentinel/Defender analytics rule then monitors storage activity and sends an email alert whenever a file is created.
+
+This helps SOC analysts detect unusual or suspicious uploads to storage accounts.
+
+## 🛠️ Playbook Steps
+
+**1️⃣ HTTP Trigger**
+
+The Logic App starts with the “When an HTTP request is received” trigger.
+A sample request looks like:
+<img width="541" height="97" alt="image" src="https://github.com/user-attachments/assets/4317b68a-503a-49e1-b0ec-5ba8550dd0d7" />
+
+The Logic App extracts the value of name.
+
+**2️⃣ Create Blob (V2)**
+
+This is the main action of the playbook.
+
+**The Logic App:**
+
+Connects to the selected Storage Account
+
+Uses a predefined folder (example: /kohli)
+
+Creates a .txt file using the provided name
+
+Writes a simple text message inside the file
+
+Blob Name Example:
+
+hacker.txt
+
+
+Blob Content Example:
+
+hello hacker!
+
+
+So whatever name is passed in the request becomes both:
+
+the filename
+
+and part of the content stored inside Blob Storage.
+
+**3️⃣ HTTP Response**
+
+After creating the blob, the Logic App sends a response back to the requester.
+
+Example response:
+
+hello hacker
+
+
+This confirms that the request was processed successfully.
+
+## 🎯 Purpose of This Playbook ##
+
+**This automation shows:**
+
+✔️ How to trigger a Logic App using HTTP
+
+✔️ How to pass parameters dynamically
+
+✔️ How to store incoming data into Azure Blob Storage
+
+✔️ How to build simple, clean automation workflows
+
+✔️ This playbook helpful to get the alert whenever any one try to store anything via manual way or using any scripts to store anything i will get the alert 
+## 📸 Screenshots ##
+
+**Overview of the architecture**
+<img width="766" height="157" alt="image" src="https://github.com/user-attachments/assets/795610a8-481b-4188-be00-766965564914" />
+
+**playbooks**
+
+<img width="1349" height="544" alt="image" src="https://github.com/user-attachments/assets/dbf8e28f-71cc-4cdb-aca4-91c71b12f6e7" />
+<img width="1094" height="499" alt="image" src="https://github.com/user-attachments/assets/6f790482-ea0b-4769-acf5-8ea59f15b127" />
+
+**By taking the get request parameter like hacker it will store in the storage account**
+<img width="541" height="97" alt="image" src="https://github.com/user-attachments/assets/b8625426-994e-4e8e-84f8-197a4a9718b1" />
+<img width="1366" height="343" alt="image" src="https://github.com/user-attachments/assets/cb19b37c-2d05-497c-aefe-a202b21461ee" />
+<img width="1366" height="516" alt="image" src="https://github.com/user-attachments/assets/b48f2001-5952-4759-9574-f10cbdaed475" />
+
+**After that eveytime when someone upload or store anything i can get the alert to my email through my playbook**
+<img width="272" height="510" alt="image" src="https://github.com/user-attachments/assets/993d2481-f446-41c8-89d7-b09a050c8de8" />
+<img width="255" height="506" alt="image" src="https://github.com/user-attachments/assets/a99a216b-cc53-4fc4-bbd8-63fcc9e31228" />
 
 
 
