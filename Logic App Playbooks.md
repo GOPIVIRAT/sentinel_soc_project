@@ -135,6 +135,204 @@ This helps automate response to suspicious or unwanted user creation.
 <img width="1169" height="456" alt="image" src="https://github.com/user-attachments/assets/fe4c7889-5e97-44f3-b465-0fcfd688f6f3" />
 
 
+# 🛡️ VirusTotal IP Reputation Lookup Playbook (Using Threat Indicators)
+## 📌 Overview
+
+This playbook takes IPs from Threat Intelligence Indicators in Microsoft Sentinel, sends them to VirusTotal, receives reputation details, and then sends the final report to email.
+This helps analysts quickly understand whether an external IP is malicious or suspicious.
+
+## 🔄 Workflow Summary
+## 1️⃣ Extract IPs from Threat Indicators
+
+The playbook reads threat intelligence items (TI Indicators) stored in Sentinel.
+Example sources:
+
+External threat feeds
+
+TI connectors
+
+Imported IOC lists
+
+The playbook extracts:
+
+Indicator type (IP)
+
+The actual IP value
+
+## 2️⃣ Send IP to VirusTotal API
+
+Each extracted IP is passed to VirusTotal using an HTTP action.
+
+VirusTotal returns details such as:
+
+Malicious / Suspicious / Harmless
+
+Number of engines reporting the IP as malicious
+
+Category and reputation
+
+Community votes
+
+## 3️⃣ Format the Report
+
+The playbook formats the reputation data into a readable report, including:
+
+IP address
+
+Detection ratio
+
+Analysis categories
+
+Detailed results
+
+## 4️⃣ Email the Results
+
+A full report for every IP is sent to your mailbox using:
+Outlook connector
+This allows quick review without opening Sentinel.
+
+## Screenshot with Explanation:
+
+**Firstly i was able to create a detection rule to extract the suspicious ip's**
+<img width="989" height="455" alt="image" src="https://github.com/user-attachments/assets/24e7b2dc-bc9c-448e-aaf7-10936de665d4" />
+
+**you can see that the rule was triggered and there was 10 ip's extracted**
+
+<img width="1097" height="599" alt="image" src="https://github.com/user-attachments/assets/c64d70f0-b312-40d8-a50e-79cc04a2c706" />
+
+**Then i was able to build a playbook that will get the report of individual ip's**
+
+<img width="1099" height="468" alt="image" src="https://github.com/user-attachments/assets/d88c3291-070a-43e5-8c4f-52dc21d4913e" />
+
+**After that i am manually Triggering the incident**
+
+<img width="1104" height="488" alt="image" src="https://github.com/user-attachments/assets/bc01b50a-9213-4b05-b073-634f5b2a4090" />
+
+
+
+**You can see the report of ip's here**
+<img width="618" height="344" alt="image" src="https://github.com/user-attachments/assets/569d2272-44a7-4c89-b40b-2962bae4e289" />
+
+
+
+**After that i was able to send the whole report to my email**
+
+<img width="652" height="508" alt="image" src="https://github.com/user-attachments/assets/9939589f-dbc5-4ee5-b39d-889b1107d76f" />
+<img width="1123" height="552" alt="image" src="https://github.com/user-attachments/assets/9eacdd4f-c390-45b8-a535-5baa566c10e7" />
+
+
+
+# 🧪 VirusTotal Enrichment Playbooks (URL, Domain, File Hash)
+## 📌 Overview ##
+
+After completing the full IP reputation playbook and seeing it work end-to-end, I built three additional VirusTotal enrichment playbooks:
+
+URL Reputation Playbook
+
+Domain Reputation Playbook
+
+File Hash Reputation Playbook
+
+These were created to demonstrate my ability to design and automate different types of threat-enrichment workflows, even though the IP playbook already covered the practical testing.
+
+## 🔹 1️⃣ URL Reputation Playbook ##
+
+Purpose
+
+Takes a URL as input, sends it to VirusTotal, and retrieves:
+
+Malicious / Suspicious score
+
+Detection engines results
+
+URL categories
+
+Final reputation status
+
+## Workflow Summary ##
+
+Receive URL
+
+Send to VirusTotal API
+
+Parse JSON response
+
+Format results
+
+Email or log the final report
+
+## Screenshots ##
+
+<img width="311" height="462" alt="image" src="https://github.com/user-attachments/assets/20f051f4-2600-4115-8d1b-84ead6b076c3" />
+
+<img width="1120" height="491" alt="image" src="https://github.com/user-attachments/assets/1b651887-e9ab-42bb-a0d4-14d8af97945f" />
+
+
+## 🔹 2️⃣ Domain Reputation Playbook ##
+Purpose 
+
+Checks the reputation of a domain using VirusTotal.
+
+Returns:
+
+Domain categorization
+
+Registrar information
+
+Malicious/suspicious flags
+
+Community votes
+
+Workflow Summary
+
+Receive domain value
+
+VirusTotal domain endpoint query
+
+Extract key results
+
+Send report to email or Sentinel
+
+## Screenshots ##
+
+<img width="323" height="471" alt="image" src="https://github.com/user-attachments/assets/390d40ba-6778-45d6-8343-54d7f1e611ae" />
+
+<img width="1143" height="361" alt="image" src="https://github.com/user-attachments/assets/cee71911-ca08-47d3-ab4d-948617bf0f2b" />
+
+
+## 🔹 3️⃣ File Hash Reputation Playbook ##
+Purpose
+
+Takes a file hash (MD5 / SHA1 / SHA256) and retrieves:
+
+Malware detection score
+
+Number of malicious detections
+
+File classification
+
+Behavior information (if available)
+
+## Workflow Summary ##
+
+Receive file hash
+
+VirusTotal file-report API call
+
+Parse detection engines
+
+Format structured report
+
+Email to SOC analyst
+
+## Screenshots ##
+
+<img width="319" height="473" alt="image" src="https://github.com/user-attachments/assets/ece35690-f4b9-4ab2-b688-39b435fc1e0f" />
+
+<img width="1137" height="537" alt="image" src="https://github.com/user-attachments/assets/febeee14-d945-4f46-ac12-cf5d7b712cb8" />
+
+
+
 
 
 
