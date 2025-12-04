@@ -49,35 +49,25 @@ This hands-on work helped me understand cloud workload protection, posture manag
 
 Here I practiced scripting that is useful for SOC analysts:
 
-**PowerShell**
-
+**PowerShell**  
 I used PowerShell to:
+- Inspect running processes
+- Review network connections
+- Export logs
+- Analyze events
+- Interact directly with the attacked machine  
 
-inspect running processes
+*This improved my endpoint investigation skills.*
 
-review network connections
-
-export logs
-
-analyze events
-
-interact directly with the attacked machine
-
-This improved my endpoint investigation skills.
-
-**Python**
-
+**Python**  
 I used Python for:
+- Extracting IPs from large files
+- Cleaning and parsing logs
+- Writing small automation helpers
+- File handling tasks  
 
-extracting IPs from large files
+*This strengthened my SOC automation and data-processing skills.*
 
-cleaning and parsing logs
-
-writing small automation helpers
-
-file handling tasks
-
-This strengthened my SOC automation and data-processing skills.
 
 # 9. AI Security Analyst
 
