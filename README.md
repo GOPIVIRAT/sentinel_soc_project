@@ -3,7 +3,7 @@
 # 1. Introduction
 
 I’m Gopi Siddamsetty, an MCA graduate specializing in Cybersecurity.
-Before starting this project, I built strong practical knowledge by studying the AZ-900, SC-900, and SC-200 topics through Microsoft Learn, online labs, and YouTube.
+Before starting this project, I built strong practical knowledge by studying and practise the AZ-900, SC-900, and SC-200 topics through Microsoft Learn, online labs, and YouTube and my azure student subscription.
 This foundation helped me confidently start this project and understand cloud security concepts in a real environment.
 
 # 2. KQL (Kusto Query Language)
