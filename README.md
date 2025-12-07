@@ -77,7 +77,7 @@ While learning, I built a basic understanding of LLMs, ML fundamentals, and AI-d
 
 # 🎯 FINAL OUTCOME
 
-**“Overall, this project gave me hands-on experience across the entire security operations workflow — attacking, detecting, investigating, and automating.
+**“Overall, this project gave me hands-on experience across the entire security operations workflow in cloud— attacking, detecting, investigating, and automating.
 Each section improved a specific SOC skill:
 
 ✔ KQL → Faster investigations
