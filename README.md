@@ -75,8 +75,23 @@ My long-term goal is to become an AI-powered Security Analyst.
 Here I explored how AI helps SOC teams — from detection enhancement to agent-based automation.
 While learning, I built a basic understanding of LLMs, ML fundamentals, and AI-driven security workflows, which supports my future-proof career path.
 
-# ✔️ Outcome
+# 🎯 FINAL OUTCOME
 
-This entire project reflects my hands-on journey — from learning fundamentals to performing attacks, detecting threats, building playbooks, and understanding modern defender tools.
+**“Overall, this project gave me hands-on experience across the entire security operations workflow — attacking, detecting, investigating, and automating.
+Each section improved a specific SOC skill:
 
-It demonstrates practical skills that I can apply directly as a Cloud SOC Analyst.
+✔ KQL → Faster investigations
+
+✔ Sentinel → Real SIEM workflow understanding
+
+✔ Attack simulation → Better detection logic
+
+✔ Logic Apps → Automated response
+
+✔ Defender → Multi-layered visibility
+
+✔ Scripts → Efficient evidence collection
+
+✔ AI → Next-gen SOC readiness
+
+This project prepared me to contribute effectively from day one as a Cloud SOC Analyst.”**
